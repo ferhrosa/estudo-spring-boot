@@ -1,0 +1,101 @@
+{
+	"info": {
+		"_postman_id": "f891efca-1b91-46a2-a8fc-73be040a39bc",
+		"name": "Estudos - Spring Boot - voll-med",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1518662"
+	},
+	"item": [
+		{
+			"name": "Médicos",
+			"item": [
+				{
+					"name": "Cadastrar Médico",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"{{$randomFullName}}\",\r\n    \"email\": \"{{$randomExampleEmail}}\",\r\n    \"crm\": \"{{$randomInt}}\",\r\n    \"especialidade\": \"ORTOPEDIA\",\r\n    \"endereco\": {\r\n        \"logradouro\": \"{{$randomStreetName}}\",\r\n        \"bairro\": \"{{$randomCity}}\",\r\n        \"cep\": \"12345678\",\r\n        \"cidade\": \"{{$randomCity}}\",\r\n        \"uf\": \"{{$randomCountryCode}}\",\r\n        \"complemento\": null,\r\n        \"numero\": \"{{$randomInt}}\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/medicos",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"medicos"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Pacientes",
+			"item": [
+				{
+					"name": "Cadastrar Paciente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"{{$randomFullName}}\",\r\n    \"email\": \"{{$randomExampleEmail}}\",\r\n    \"telefone\": \"{{$randomPhoneNumber}}\",\r\n    \"cpf\": \"123.456.789-09\",\r\n    \"endereco\": {\r\n        \"logradouro\": \"{{$randomStreetName}}\",\r\n        \"bairro\": \"{{$randomCity}}\",\r\n        \"cep\": \"12345678\",\r\n        \"cidade\": \"{{$randomCity}}\",\r\n        \"uf\": \"{{$randomCountryCode}}\",\r\n        \"complemento\": null,\r\n        \"numero\": \"{{$randomInt}}\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/pacientes",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"pacientes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base-url",
+			"value": "http://localhost:8080",
+			"type": "string"
+		}
+	]
+}
