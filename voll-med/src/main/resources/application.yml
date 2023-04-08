@@ -1,0 +1,5 @@
+spring:
+  datasource:
+    url: jdbc:sqlite:voll-med.db
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
