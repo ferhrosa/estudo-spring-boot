@@ -3,3 +3,7 @@ spring:
     url: jdbc:sqlite:voll-med.db
   jpa:
     database-platform: org.hibernate.community.dialect.SQLiteDialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
