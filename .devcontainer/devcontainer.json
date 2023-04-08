@@ -11,8 +11,7 @@
       "installGradle": false
     },
 
-    "ghcr.io/devcontainers-contrib/features/mysql-homebrew:1": {
-    }
+    "ghcr.io/warrenbuckley/codespace-features/sqlite:1": {}
 
   }
 }

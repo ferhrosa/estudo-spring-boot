@@ -13,7 +13,7 @@ O projeto possui um "_dev container_" de Java configurado. Portanto, esse pode s
 
 O _dev container_ está configurado para já ter todas as dependências de ambiente do projeto satisfeitas:
 - Maven
-- MySQL (**TODO: pendente de ser adicionado ainda**)
+- SQLite (v3)
 
 Estando dentro do _dev container_, para executar o projeto pode ser usado o script [`mvnw`](mvnw) (já veio nos arquivos iniciais do _Spring Initializr_). O plugin de Maven a ser usado é o `spring-boot`, com o comando `run`:
 
