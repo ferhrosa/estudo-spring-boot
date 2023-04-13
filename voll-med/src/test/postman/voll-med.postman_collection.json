@@ -10,13 +10,80 @@
 			"name": "Médicos",
 			"item": [
 				{
+					"name": "Listar Médicos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/api/medicos?sort=id",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"medicos"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "id"
+								},
+								{
+									"key": "sort",
+									"value": "nome,desc",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Cadastrar Médico",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const crm = Math.floor(Math.random() * 100000 + 10000);\r",
+									"\r",
+									"const especialidades = [\r",
+									"    'ORTOPEDIA',\r",
+									"    'CARDIOLOGIA',\r",
+									"    'GINECOLOGIA',\r",
+									"    'DERMATOLOGIA',\r",
+									"];\r",
+									"\r",
+									"const especialidade = especialidades[Math.floor(Math.random() * especialidades.length)];\r",
+									"\r",
+									"const cep = Math.floor(Math.random() * 10000000 + 10000).toString().padStart(8, '0');\r",
+									"\r",
+									"// Disponibiliza as variáveis para uso na solicitação.\r",
+									"pm.variables.set('crm', crm);\r",
+									"pm.variables.set('especialidade', especialidade);\r",
+									"pm.variables.set('cep', cep);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"{{$randomFullName}}\",\r\n    \"email\": \"{{$randomExampleEmail}}\",\r\n    \"crm\": \"{{$randomInt}}\",\r\n    \"especialidade\": \"ORTOPEDIA\",\r\n    \"endereco\": {\r\n        \"logradouro\": \"{{$randomStreetName}}\",\r\n        \"bairro\": \"{{$randomCity}}\",\r\n        \"cep\": \"12345678\",\r\n        \"cidade\": \"{{$randomCity}}\",\r\n        \"uf\": \"{{$randomCountryCode}}\",\r\n        \"complemento\": null,\r\n        \"numero\": \"{{$randomInt}}\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"nome\": \"{{$randomFullName}}\",\r\n    \"email\": \"{{$randomExampleEmail}}\",\r\n    \"telefone\": \"{{$randomPhoneNumber}}\",\r\n    \"crm\": \"{{crm}}\",\r\n    \"especialidade\": \"{{especialidade}}\",\r\n    \"endereco\": {\r\n        \"logradouro\": \"{{$randomStreetName}}\",\r\n        \"bairro\": \"{{$randomCity}}\",\r\n        \"cep\": \"{{cep}}\",\r\n        \"cidade\": \"{{$randomCity}}\",\r\n        \"uf\": \"{{$randomCountryCode}}\",\r\n        \"complemento\": null,\r\n        \"numero\": \"{{$randomInt}}\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -35,6 +102,86 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Atualizar Médico",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const crm = Math.floor(Math.random() * 100000 + 10000);\r",
+									"\r",
+									"const especialidades = [\r",
+									"    'ORTOPEDIA',\r",
+									"    'CARDIOLOGIA',\r",
+									"    'GINECOLOGIA',\r",
+									"    'DERMATOLOGIA',\r",
+									"];\r",
+									"\r",
+									"const especialidade = especialidades[Math.floor(Math.random() * especialidades.length)];\r",
+									"\r",
+									"const cep = Math.floor(Math.random() * 10000000 + 10000).toString().padStart(8, '0');\r",
+									"\r",
+									"// Disponibiliza as variáveis para uso na solicitação.\r",
+									"pm.variables.set('crm', crm);\r",
+									"pm.variables.set('especialidade', especialidade);\r",
+									"pm.variables.set('cep', cep);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 3,\r\n    \"nome\": \"{{$randomFullName}}\",\r\n    \"telefone\": \"{{$randomPhoneNumber}}\",\r\n    // \"endereco\": {\r\n    //     \"logradouro\": \"{{$randomStreetName}}\",\r\n    //     \"bairro\": \"{{$randomCity}}\",\r\n    //     \"cep\": \"{{cep}}\",\r\n    //     \"cidade\": \"{{$randomCity}}\",\r\n    //     \"uf\": \"{{$randomCountryCode}}\",\r\n    //     \"complemento\": null,\r\n    //     \"numero\": \"{{$randomInt}}\"\r\n    // },\r\n    \"_\": null // apenas para facilitar testes\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/medicos",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"medicos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Médico",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/api/medicos/:id",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"medicos",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "4"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -42,13 +189,75 @@
 			"name": "Pacientes",
 			"item": [
 				{
+					"name": "Listar Pacientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/api/pacientes?sort=id",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"pacientes"
+							],
+							"query": [
+								{
+									"key": "size",
+									"value": "3",
+									"disabled": true
+								},
+								{
+									"key": "page",
+									"value": "0",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "id"
+								},
+								{
+									"key": "sort",
+									"value": "nome,desc",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "Cadastrar Paciente",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const cpf = Math.floor(Math.random() * 100000000000 + 100000000000)\r",
+									"    .toString()\r",
+									"    .substr(1, 11)\r",
+									"    .replace(\r",
+									"        /(\\d{3})(\\d{3})(\\d{3})(\\d{2})/,\r",
+									"        (regex, p1, p2, p3, p4) => `${p1}.${p2}.${p3}-${p4}`);\r",
+									"\r",
+									"const cep = Math.floor(Math.random() * 10000000 + 10000).toString().padStart(8, '0');\r",
+									"\r",
+									"// Disponibiliza as variáveis para uso na solicitação.\r",
+									"pm.variables.set('cpf', cpf);\r",
+									"pm.variables.set('cep', cep);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"{{$randomFullName}}\",\r\n    \"email\": \"{{$randomExampleEmail}}\",\r\n    \"telefone\": \"{{$randomPhoneNumber}}\",\r\n    \"cpf\": \"123.456.789-09\",\r\n    \"endereco\": {\r\n        \"logradouro\": \"{{$randomStreetName}}\",\r\n        \"bairro\": \"{{$randomCity}}\",\r\n        \"cep\": \"12345678\",\r\n        \"cidade\": \"{{$randomCity}}\",\r\n        \"uf\": \"{{$randomCountryCode}}\",\r\n        \"complemento\": null,\r\n        \"numero\": \"{{$randomInt}}\"\r\n    }\r\n}",
+							"raw": "{\r\n    \"nome\": \"{{$randomFullName}}\",\r\n    \"email\": \"{{$randomExampleEmail}}\",\r\n    \"telefone\": \"{{$randomPhoneNumber}}\",\r\n    \"cpf\": \"{{cpf}}\",\r\n    \"endereco\": {\r\n        \"logradouro\": \"{{$randomStreetName}}\",\r\n        \"bairro\": \"{{$randomCity}}\",\r\n        \"cep\": \"{{cep}}\",\r\n        \"cidade\": \"{{$randomCity}}\",\r\n        \"uf\": \"{{$randomCountryCode}}\",\r\n        \"complemento\": null,\r\n        \"numero\": \"{{$randomInt}}\"\r\n    }\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -63,6 +272,81 @@
 							"path": [
 								"api",
 								"pacientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Paciente",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const cpf = Math.floor(Math.random() * 100000000000 + 100000000000)\r",
+									"    .toString()\r",
+									"    .substr(1, 11)\r",
+									"    .replace(\r",
+									"        /(\\d{3})(\\d{3})(\\d{3})(\\d{2})/,\r",
+									"        (regex, p1, p2, p3, p4) => `${p1}.${p2}.${p3}-${p4}`);\r",
+									"\r",
+									"const cep = Math.floor(Math.random() * 10000000 + 10000).toString().padStart(8, '0');\r",
+									"\r",
+									"// Disponibiliza as variáveis para uso na solicitação.\r",
+									"pm.variables.set('cpf', cpf);\r",
+									"pm.variables.set('cep', cep);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"nome\": \"{{$randomFullName}}\",\r\n    // \"telefone\": \"{{$randomPhoneNumber}}\",\r\n    // \"endereco\": {\r\n    //     \"logradouro\": \"{{$randomStreetName}}\",\r\n    //     \"bairro\": \"{{$randomCity}}\",\r\n    //     \"cep\": \"{{cep}}\",\r\n    //     \"cidade\": \"{{$randomCity}}\",\r\n    //     \"uf\": \"{{$randomCountryCode}}\",\r\n    //     \"complemento\": null,\r\n    //     \"numero\": \"{{$randomInt}}\"\r\n    // },\r\n    \"_\": null // apenas para facilitar testes\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/pacientes",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"pacientes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Paciente",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base-url}}/api/pacientes/:id",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"pacientes",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "2"
+								}
 							]
 						}
 					},
