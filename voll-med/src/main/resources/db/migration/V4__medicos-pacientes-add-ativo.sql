@@ -1,0 +1,5 @@
+ALTER TABLE medicos
+    ADD ativo BOOLEAN DEFAULT (TRUE);
+
+ALTER TABLE pacientes
+    ADD ativo BOOLEAN DEFAULT (TRUE);
